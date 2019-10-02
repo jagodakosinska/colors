@@ -44,6 +44,9 @@ button:hover {
 
 .message {
     display: inline-block;
+    color: steelblue;
+    letter-spacing: 1px;
+    font-weight: 700;
 }
 
 .stripe {
@@ -66,5 +69,6 @@ button:hover {
 }
 
 .selected {
-    background: blue;
+    background: steelblue;
+    color: white;
 }
