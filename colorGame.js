@@ -1,14 +1,48 @@
-let colors = genRandomColors(6);
-
+let numSquares = 6;
+let colors = genRandomColors(numSquares);
 let squares = document.querySelectorAll(".square");
 let pickedColor = pickColor();
 let colorDisplay = document.querySelector(".colorDisplay");
 let messageDisplay = document.querySelector(".message");
 let h1 = document.querySelector("h1");
-let reset = document.querySelector(".reset");
+let resetBtn = document.querySelector(".reset");
+let easyBtn = document.querySelector(".easy");
+let hardBtn = document.querySelector(".hard");
 
-reset.addEventListener("click", function() {
-    colors = genRandomColors(6);
+
+easyBtn.addEventListener("click", function() {
+    hardBtn.classList.remove("selected");
+    easyBtn.classList.add("selected");
+    numSquares = 3;
+    colors = genRandomColors(numSquares)
+    pickedColor = pickColor();
+    colorDisplay.textContent = pickedColor;
+    for (let i = 0; i < squares.length; i++) {
+        if (colors[i]) {
+            squares[i].style.backgroundColor = colors[i];
+        } else {
+            squares[i].style.display = "none";
+        }
+    }
+
+});
+
+hardBtn.addEventListener("click", function() {
+    hardBtn.classList.add("selected");
+    easyBtn.classList.remove("selected");
+    numSquares = 6;
+    colors = genRandomColors(numSquares);
+    pickedColor = pickColor();
+    colorDisplay.textContent = pickedColor;
+    for (let i = 0; i < squares.length; i++) {
+        squares[i].style.backgroundColor = colors[i];
+        squares[i].style.display = "block";
+
+    }
+});
+
+resetBtn.addEventListener("click", function() {
+    colors = genRandomColors(numSquares);
     pickedColor = pickColor();
     colorDisplay.textContent = pickedColor;
     for (let i = 0; i < squares.length; i++) {
@@ -30,7 +64,7 @@ for (let i = 0; 1 < squares.length; i++) {
             messageDisplay.textContent = "Correct";
             changeColors(clickedColor);
             h1.style.backgroundColor = pickedColor;
-            reset.textContent = "Play again";
+            resetBtn.textContent = "Play again";
         } else {
             this.style.backgroundColor = "#232323";
             messageDisplay.textContent = "Try again";
